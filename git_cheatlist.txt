@@ -1,0 +1,26 @@
+# Basic git workflow:
+
+ 1. Always check whether there is some new/modified file from the repository:
+
+    git pull
+
+
+ 2. To sand a new/modified file for the repository:
+
+    2.1 git add [file_name] 
+    2.2 git commit -m ["short message"]
+    2.3 git push
+   
+    - Note: we can add many files before including an unique commit message. 
+
+
+ 3. Check the files that we add:
+    
+    git status
+
+
+# Reference: ________________________________________________________________________
+ - https://www.hostinger.com/tutorials/basic-git-commands
+ - https://confluence.atlassian.com/bitbucketserver/basic-git-commands-776639767.html
+ - https://tutorialzine.com/2016/06/learn-git-in-30-minutes
+ 
