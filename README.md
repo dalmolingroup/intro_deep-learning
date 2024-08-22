@@ -29,6 +29,12 @@ Please make sure to install the following Python modules for this course (pip in
 * **matplotlib**
 * **tensorflow**
 
+You can install the dependencies using a conda recipe
+
+```bash
+conda env create -f environment.yml
+```
+
 ## References
 
 * [Deep Learning with Python](https://books.google.com.br/books/about/Deep_Learning_with_Python.html?id=Yo3CAQAACAAJ&redir_esc=y);
