@@ -1,4 +1,5 @@
 import numpy as np
+from tensorflow import keras
 
 def arruma_dados(df):
 
@@ -27,4 +28,24 @@ def arruma_dados(df):
     y_test = y[N_train:]
 
     return (X_train, y_train), (X_test, y_test), df
+
+
+def MyModel():
+
+    In = keras.Input(shape=(6,))
+        
+    x = keras.layers.Dense(50, activation='sigmoid')(In)
+    
+    x = keras.layers.Dense(200, activation='sigmoid')(x)
+    
+    x = keras.layers.Dropout(0.5)(x)
+    
+    x = keras.layers.Dense(20, activation='sigmoid')(x)
+    
+    Out = keras.layers.Dense(1, activation='sigmoid')(x)
+    
+    return keras.Model(inputs=In, outputs=Out)
+
+
+
 
