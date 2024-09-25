@@ -48,7 +48,7 @@ def MyModel():
     return keras.Model(inputs=In, outputs=Out)
 
 
-def load_mnist():
+def load_mnist(net):
     
     # import MNIST data:
     (x_train, y_train), (x_test, y_test) = keras.datasets.mnist.load_data(path="mnist.npz")
@@ -84,18 +84,22 @@ def load_mnist():
     
     y_train = one_hot(y_train)
     y_test = one_hot(y_test)
-    
-    # flatten x data (the number arrays) as dense layers' input vectors: (N, 28, 28) -> (N, 28*28)
-    def flatten(x):
-    
-        N, n, m = x.shape
-    
-        return x.reshape(N, n*m)
-    
-    
-    x_train = flatten(x_train)
-    x_test = flatten(x_test)
-    
+
+    if net == "dense": # flatten: (N, 28, 28) -> (N, 28*28)
+        def flatten(x):
+            N, n, m = x.shape
+            return x.reshape(N, n*m)
+        
+        x_train = flatten(x_train)
+        x_test = flatten(x_test)
+
+    elif net == "cnn": # (N, 28, 28) -> (N, 28, 28, 1)
+        x_train = np.expand_dims(x_train, axis=-1)
+        x_test = np.expand_dims(x_test, axis=-1)
+
+    else:
+        print("NOT AN OPTION!\n")
+        
     # splitting the train data into train and validation:
     N_val = int(0.2*x_train.shape[0])
     
@@ -130,4 +134,22 @@ def dense_mnist():
     
     return keras.Model(inputs=In, outputs=Out)
 
+
+def cnn_mnist():
+        
+    In = layers.Input((28, 28, 1))
+        
+    x = layers.Conv2D(32, kernel_size=3, activation="relu")(In)
+    x = layers.MaxPooling2D((2,2))(x)
+    
+    x = layers.Conv2D(64, kernel_size=3, activation="relu")(x)
+    x = layers.MaxPooling2D((2,2))(x)
+    
+    x = layers.Flatten()(x)
+    
+    x = layers.Dense(400, activation="relu")(x)
+    
+    Out = layers.Dense(10, activation="softmax")(x)
+    
+    return keras.Model(inputs=In, outputs=Out)
 
