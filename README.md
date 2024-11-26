@@ -25,6 +25,7 @@ Please make sure to install the following Python modules for this course (pip in
 
 * **numpy**
 * **scipy**
+* **string**
 * **pandas**
 * **matplotlib**
 * **tensorflow**
