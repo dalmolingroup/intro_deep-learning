@@ -24,8 +24,8 @@ The whole course is divided into two modules. Their contents may change througho
 Please make sure to install the following Python modules for this course (pip install *module-name*):
 
 * **os**
-* **numpy**
 * **string**
+* **numpy**
 * **pandas**
 * **matplotlib**
 * **tensorflow**
