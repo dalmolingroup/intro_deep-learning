@@ -23,8 +23,8 @@ The whole course is divided into two modules. Their contents may change througho
 ## Required Python modules
 Please make sure to install the following Python modules for this course (pip install *module-name*):
 
+* **os**
 * **numpy**
-* **scipy**
 * **string**
 * **pandas**
 * **matplotlib**
