@@ -1,4 +1,5 @@
 import numpy as np
+from tensorflow.keras import layers
 
 def pretrained_embedding(vocab):
 
@@ -47,4 +48,44 @@ def pretrained_embedding(vocab):
     print(f"Converted {hits} words ({misses} misses)")
 
     return embedding_weights, embed_dict, embed_dim
+
+
+def zen_of_python(max_len, embed_dim):
+        
+    # 1. import corpus:
+    corpus = ["Beautiful is better than ugly",
+              "Explicit is better than implicit",
+              "Simple is better than complex",
+              "Complex is better than complicated",
+              "Flat is better than nested",
+              "Sparse is better than dense",
+              "Readability counts",
+              "Special cases aren't special enough to break the rules",
+              "Although practicality beats purity",
+              "Errors should never pass silently",
+              "Unless explicitly silenced",
+              "In the face of ambiguity, refuse the temptation to guess",
+              "There should be one -- and preferably only one -- obvious way to do it",
+              "Although that way may not be obvious at first unless you're Dutch",
+              "Now is better than never",
+              "Although never is often better than right now",
+              "If the implementation is hard to explain, it's a bad idea",
+              "If the implementation is easy to explain, it may be a good idea",
+              "Namespaces are one honking great idea -- let's do more of those!"]
+
+    # 2. transform each sentence into a list of token IDs:
+    vectorize = layers.TextVectorization(max_tokens=None,
+                                         standardize='lower_and_strip_punctuation',
+                                         split='whitespace',
+                                         output_mode='int',
+                                         output_sequence_length=max_len)
+    
+    vectorize.adapt(corpus)
+
+    # 3. make word-embedding:
+    embedding = layers.Embedding(input_dim=vectorize.vocabulary_size(), output_dim=embed_dim)
+    
+    # get the embedded tokens
+    return embedding(vectorize(corpus)).numpy()
+    
     
